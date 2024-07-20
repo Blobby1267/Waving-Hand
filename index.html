@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arduino Controller</title>
+    <script>
+        async function sendMoveCommand() {
+            try {
+                let response = await fetch('http://localhost:5000/move', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    let jsonResponse = await response.json();
+                    alert(jsonResponse.message);
+                } else {
+                    alert('Failed to send command');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Arduino Controller</h1>
+    <button onclick="sendMoveCommand()">Move Arduino</button>
+</body>
+</html>
